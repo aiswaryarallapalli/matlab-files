@@ -1,0 +1,17 @@
+close all;
+path="C:\Users\cbs09\OneDrive\Pictures\t.jfif ";
+im=imread(path);
+%level=graythresh(im);
+%G=im2bw(im,level);
+G1=rgb2gray(im);
+m1=imtophat(G1,strel('disk',10));
+%m2=imadjust(m1);
+level=graythresh(m1);
+G=im2bw(m1,level);
+c=~G;
+d=-bwdist(c);
+d(c)=-Inf;
+h=watershed(d);
+w=label2rgb(h,'hot');
+subplot(1,2,1);imshow(w);
+subplot(1,2,2);imshow(im);
